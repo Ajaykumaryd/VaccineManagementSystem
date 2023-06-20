@@ -23,6 +23,8 @@ public class User{
     @Column(unique = true)
     private String emailId;
 
+
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
     private String mobileNo;
