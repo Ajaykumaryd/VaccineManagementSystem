@@ -1,15 +1,12 @@
 package com.example.vaccineManagementSystem.Models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
 import com.example.vaccineManagementSystem.Enums.Gender;
-
+import jakarta.persistence.*;
 
 @Entity
 @Table(name="users")
-public class User{
-
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -76,4 +73,21 @@ public class User{
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

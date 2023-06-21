@@ -1,31 +1,41 @@
 package com.example.vaccineManagementSystem.Models;
 
-
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @Entity
-@Table(name="dose")
-public class Dose1 {
+@Table(name = "dose")
+public class Dose {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //Primary Key
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String doseId; //Unique
 
     @CreationTimestamp
-    private Date creationDate;
+    private Date vaccinationDate;
 
+    @OneToOne
+    @JoinColumn
+    private User user;
 
-    public Integer getId() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,11 +47,13 @@ public class Dose1 {
         this.doseId = doseId;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public Date getVaccinationDate() {
+        return vaccinationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setVaccinationDate(Date creationDate) {
+        this.vaccinationDate = creationDate;
     }
+
+
 }
