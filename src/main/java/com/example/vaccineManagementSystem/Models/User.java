@@ -24,6 +24,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+     private Dose dose;
+
+    public Dose getDose() {
+        return dose;
+    }
+
+    public void setDose(Dose dose) {
+        this.dose = dose;
+    }
+
     private String mobileNo;
 
     public int getUserId() {
