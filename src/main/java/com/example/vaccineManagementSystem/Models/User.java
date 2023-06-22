@@ -28,8 +28,8 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
      private Dose dose;
 
-    public Dose getDose() {
-        return dose;
+    public Dose getDose(Dose dose) {
+        return this.dose;
     }
 
     public void setDose(Dose dose) {
