@@ -35,6 +35,10 @@ public class UserController {
         return service.updateEmail(emailDto);
     }
 
+    @GetMapping("/getByEmail/{emailId}")
+     public User getUserById(@PathVariable("emailId")String email){
+       return service.getUser(email);
+    }
 
 
 

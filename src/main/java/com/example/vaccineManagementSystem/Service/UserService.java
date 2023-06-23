@@ -34,6 +34,10 @@ public class UserService {
     repository.save(user);
     return "email updated sucessfully"+emailDto.getNewEmailId();
     };
+
+    public User getUser(String email) {
+     return repository.findByEmailId(email);
+    }
 }
 
 
