@@ -2,6 +2,7 @@ package com.example.vaccineManagementSystem.Controller;
 
 
 import com.example.vaccineManagementSystem.Models.User;
+import com.example.vaccineManagementSystem.RequestDtos.updateEmailDto;
 import com.example.vaccineManagementSystem.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,12 @@ public class UserController {
      }
 
 
+
+    @PutMapping("/updateEmail")
+    public String updateEmail(@RequestBody updateEmailDto emailDto){
+
+        return service.updateEmail(emailDto);
+    }
 
 
 
