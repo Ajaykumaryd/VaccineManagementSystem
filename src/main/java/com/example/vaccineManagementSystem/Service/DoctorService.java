@@ -16,7 +16,7 @@ public class DoctorService {
     public String addDoctor(Doctor doctor) throws EmailIdEmptyException,DoctorAlreadyExistsException {
 
 
-        if(doctor.getEmailId().equals(null)){
+        if(doctor.getEmailId()==(null)){
            throw new EmailIdEmptyException("Email id is mandatory") ;
         }
 
