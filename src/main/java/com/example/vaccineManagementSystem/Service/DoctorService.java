@@ -15,15 +15,12 @@ public class DoctorService {
 
     public String addDoctor(Doctor doctor) throws EmailIdEmptyException,DoctorAlreadyExistsException {
 
-
         if(doctor.getEmailId()==(null)){
            throw new EmailIdEmptyException("Email id is mandatory") ;
         }
-
         if(doctorRepository.findByEmailId(doctor.getEmailId())!=null){
             throw new DoctorAlreadyExistsException("Doctor with this emailId already exits.");
         }
-
         doctorRepository.save(doctor);
         return "Doctor has been added to the database";
     }

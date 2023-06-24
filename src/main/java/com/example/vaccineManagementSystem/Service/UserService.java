@@ -32,7 +32,7 @@ public class UserService {
     User user=repository.findById(userId).get();
     user.setEmailId(emailDto.getNewEmailId());
     repository.save(user);
-    return "email updated sucessfully"+emailDto.getNewEmailId();
+    return "email updated successfully "+emailDto.getNewEmailId();
     };
 
     public User getUser(String email) {
