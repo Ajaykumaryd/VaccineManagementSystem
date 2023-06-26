@@ -1,11 +1,18 @@
 package com.example.vaccineManagementSystem.Service;
 
+import com.example.vaccineManagementSystem.Exceptions.CenterNotFound;
 import com.example.vaccineManagementSystem.Exceptions.DoctorAlreadyExistsException;
+import com.example.vaccineManagementSystem.Exceptions.DoctorNotFound;
 import com.example.vaccineManagementSystem.Exceptions.EmailIdEmptyException;
 import com.example.vaccineManagementSystem.Models.Doctor;
+import com.example.vaccineManagementSystem.Models.VaccinationCenter;
 import com.example.vaccineManagementSystem.Repository.DoctorRepository;
+import com.example.vaccineManagementSystem.Repository.VaccinationCenterRepository;
+import com.example.vaccineManagementSystem.RequestDtos.AssociateDocDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class DoctorService {
@@ -13,6 +20,8 @@ public class DoctorService {
     @Autowired
     DoctorRepository doctorRepository;
 
+    @Autowired
+    VaccinationCenterRepository vaccinationCenterRepository;
     public String addDoctor(Doctor doctor) throws EmailIdEmptyException,DoctorAlreadyExistsException {
 
         if(doctor.getEmailId()==(null)){
@@ -24,4 +33,31 @@ public class DoctorService {
         doctorRepository.save(doctor);
         return "Doctor has been added to the database";
     }
-}
+
+    public String associateDoctor(AssociateDocDto associateDocDto) throws DoctorNotFound,CenterNotFound {
+
+        Optional<Doctor> doctorOptional=doctorRepository.findById(associateDocDto.getDocId());
+        if (!doctorOptional.isPresent()){
+            throw new DoctorNotFound("Doctor id is wrong");
+        }
+
+        Optional<VaccinationCenter> optionalCenter = vaccinationCenterRepository.findById(associateDocDto.getCenterId());
+        if(!optionalCenter.isPresent()){
+            throw new CenterNotFound("Center Id entered is incorrect");
+        }
+        Doctor doctor = doctorOptional.get();
+        VaccinationCenter vaccinationCenter = optionalCenter.get();
+
+        doctor.setVaccinationCenter(vaccinationCenter); //Setting the foreign
+
+        //Set the bidirectional map
+        //Adding this doctor the list of doctors of that vaccination Center
+        vaccinationCenter.getDoctorList().add(doctor);
+
+        vaccinationCenterRepository.save(vaccinationCenter);
+
+        return "Doctor has been associated to center";
+    }
+
+    }
+

@@ -24,6 +24,8 @@ public class DoseService {
 
         //setting its attributes
         dose.setDoseId(doseId);
+
+        //setting primary key
         dose.setUser(user);
 
         //setting the child object in that corresponding

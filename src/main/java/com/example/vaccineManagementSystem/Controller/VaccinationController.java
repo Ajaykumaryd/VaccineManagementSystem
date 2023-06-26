@@ -22,13 +22,18 @@ public class VaccinationController {
 
     @PostMapping("/add")
     public ResponseEntity<String> addCenter(@RequestBody VaccinationCenter vaccinationCenter){
-
         try {
             String result = vaccinationService.addVaccinationCenter(vaccinationCenter);
             return new ResponseEntity<>(result, HttpStatus.OK);
         } catch (VaccinationAddressNotFound e) {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
-
     }
+
+
+
+
+
+
+
 }
