@@ -1,12 +1,14 @@
 package com.example.vaccineManagementSystem.Models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "dose")
+@Data
 public class Dose {
 
     @Id
@@ -23,37 +25,6 @@ public class Dose {
     @JoinColumn
     private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDoseId() {
-        return doseId;
-    }
-
-    public void setDoseId(String doseId) {
-        this.doseId = doseId;
-    }
-
-    public Date getVaccinationDate() {
-        return vaccinationDate;
-    }
-
-    public void setVaccinationDate(Date creationDate) {
-        this.vaccinationDate = creationDate;
-    }
 
 
 }
