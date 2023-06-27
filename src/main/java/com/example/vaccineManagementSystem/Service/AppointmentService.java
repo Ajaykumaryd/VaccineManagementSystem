@@ -2,6 +2,7 @@ package com.example.vaccineManagementSystem.Service;
 
 import com.example.vaccineManagementSystem.Exceptions.DoctorNotFound;
 import com.example.vaccineManagementSystem.Exceptions.UserNotFound;
+import com.example.vaccineManagementSystem.Models.Appointment;
 import com.example.vaccineManagementSystem.Models.Doctor;
 import com.example.vaccineManagementSystem.Models.User;
 import com.example.vaccineManagementSystem.Repository.AppointmentRepository;
@@ -24,10 +25,10 @@ public class AppointmentService {
 
     @Autowired
     private UserRepository userRepository;
-    public String bookAppointment(AppointmentReqDto appointmentReqDto) throws DoctorNotFound,   UserNotFound{
+    public String bookAppointment(AppointmentReqDto appointmentReqDto) throws DoctorNotFound,UserNotFound{
 
         Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentReqDto.getDocId());
-        Optional<Doctor> doctorOptional = doctorRepository.findById(appointmentReqDto.getDocId()); //null/0
+
         if(!doctorOptional.isPresent()){
             throw new DoctorNotFound("DoctorId not found");
         }
@@ -36,5 +37,29 @@ public class AppointmentService {
             throw new UserNotFound("UserId not found");
         }
 
+        Doctor doctor = doctorOptional.get();
+        User user = userOptional.get();
+
+        Appointment appointment = new Appointment();
+
+        //Creating the object and setting of its attributes
+        appointment.setAppointmentDate(appointmentReqDto.getAppointmentDate());
+        appointment.setAppointmentTime(appointmentReqDto.getAppointmentTime());
+
+        //setting up the foreign key attributes
+        appointment.setDoctor(doctor);
+        appointment.setUser(user);
+
+
+        //saving it before so that i can get the primary key of the appointment table
+        appointment = appointmentRepository.save(appointment);
+
+        doctor.getAppointmentList().add(appointment);
+        user.getAppointmentList().add(appointment);
+
+        doctorRepository.save(doctor);
+        userRepository.save(user);
+
+        return "Appointment made sucessfully";
     }
 }
