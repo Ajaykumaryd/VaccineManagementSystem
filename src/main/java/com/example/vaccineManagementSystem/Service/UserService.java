@@ -1,15 +1,22 @@
 package com.example.vaccineManagementSystem.Service;
 
 
+import com.example.vaccineManagementSystem.Exceptions.EmailIsAlreadyPresent;
+import com.example.vaccineManagementSystem.Exceptions.EmailShouldNotNullException;
+import com.example.vaccineManagementSystem.Exceptions.UserNotFound;
 import com.example.vaccineManagementSystem.Models.Dose;
 import com.example.vaccineManagementSystem.Models.User;
 import com.example.vaccineManagementSystem.Repository.UserRepository;
+import com.example.vaccineManagementSystem.RequestDtos.AddUserDto;
 import com.example.vaccineManagementSystem.RequestDtos.updateEmailDto;
+import com.example.vaccineManagementSystem.ResponseDtos.UserResponseDto;
+import com.example.vaccineManagementSystem.Transformer.UserTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -17,8 +24,21 @@ public class UserService {
     @Autowired
     UserRepository repository;
 
-    public User addUser(User user) {
-    return repository.save(user);
+    public String addUser(AddUserDto user) throws EmailShouldNotNullException,EmailIsAlreadyPresent{
+
+    if(user.getEmailId()==null){
+        throw new EmailShouldNotNullException("Email should not be null");
+    }
+
+//    Optional<User>optionalUser=  repository.findByEmailId(user.getEmailId());
+//
+//        if(optionalUser.isEmpty()) {
+//        throw new EmailIsAlreadyPresent("Email is Already Present");
+//    }
+
+    User user1= UserTransformer.ConvertDtoToEntity(user);
+    repository.save(user1);
+    return "User Saved Successfully";
     }
 
     public Date getDate(Integer userId) {
@@ -35,8 +55,30 @@ public class UserService {
     return "email updated successfully "+emailDto.getNewEmailId();
     };
 
-    public User getUser(String email) {
-     return repository.findByEmailId(email);
+    public User getUser(String email) throws UserNotFound {
+
+     Optional<User> optionalUser=repository.findByEmailId(email);
+     if(optionalUser.isEmpty()){
+         throw new UserNotFound("User is not Found");
+     }
+     return optionalUser.get();
+    }
+
+    public UserResponseDto getById(UserResponseDto userResponseDto) throws UserNotFound{
+
+
+      Optional<User> optionalUserResponseDto=repository.findByEmailId(userResponseDto.getEmailId());
+      if(optionalUserResponseDto.isEmpty()){
+          throw new UserNotFound("User is not Presenet");
+      }
+
+      User user=optionalUserResponseDto.get();
+
+      UserResponseDto userResponseDto1=UserTransformer.ConvertEntityToEntity(user);
+
+
+     return userResponseDto1;
+
     }
 }
 

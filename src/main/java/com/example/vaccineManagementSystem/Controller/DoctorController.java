@@ -1,6 +1,7 @@
 package com.example.vaccineManagementSystem.Controller;
 
 import com.example.vaccineManagementSystem.Models.Doctor;
+import com.example.vaccineManagementSystem.RequestDtos.AddDoctorDto;
 import com.example.vaccineManagementSystem.RequestDtos.AssociateDocDto;
 import com.example.vaccineManagementSystem.Service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ public class DoctorController {
     private DoctorService doctorService;
 
     @PostMapping("/add")
-    public String addDoctor(@RequestBody Doctor doctor) {
+    public ResponseEntity<String> addDoctor(@RequestBody AddDoctorDto addDoctorDto) {
 
         try {
-            String response = doctorService.addDoctor(doctor);
-            return response;
+            String response = doctorService.addDoctor(addDoctorDto);
+            return new ResponseEntity<>(response,HttpStatus.ACCEPTED);
         }catch (Exception e){
-            return e.getMessage();
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
 

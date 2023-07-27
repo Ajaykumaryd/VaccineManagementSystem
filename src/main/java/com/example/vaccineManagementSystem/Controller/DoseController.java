@@ -2,6 +2,8 @@ package com.example.vaccineManagementSystem.Controller;
 
 import com.example.vaccineManagementSystem.Service.DoseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,9 +17,10 @@ public class DoseController {
     DoseService doseService;
 
     @PostMapping("/giveDose1")
-    public String giveDose(@RequestParam("doseId")String doseId, @RequestParam("userId")Integer userId){
-
-        return doseService.giveDose(doseId,userId);
+    public ResponseEntity<String>  giveDose(@RequestParam("doseId")String doseId, @RequestParam("userId")Integer userId){
+        String result= doseService.giveDose(doseId,userId);
+        return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
+
 
 }

@@ -34,7 +34,6 @@ public class DoseService {
         //Child will automatically get saved because of cascading effect.
         userRepository.save(user);
 
-
 //        doseRepository.save(dose);
 
         return "Dose Given to user successfully";

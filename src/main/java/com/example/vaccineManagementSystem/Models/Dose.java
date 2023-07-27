@@ -1,5 +1,6 @@
 package com.example.vaccineManagementSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,8 @@ import java.util.Date;
 @Data
 public class Dose {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //Primary Key
@@ -21,6 +24,7 @@ public class Dose {
     @CreationTimestamp
     private Date vaccinationDate;
 
+    @JsonIgnore  //to stop infinite recursion
     @OneToOne
     @JoinColumn
     private User user;

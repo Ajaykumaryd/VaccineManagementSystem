@@ -1,10 +1,17 @@
 package com.example.vaccineManagementSystem.Controller;
 
 
+import com.example.vaccineManagementSystem.Exceptions.EmailIsAlreadyPresent;
+import com.example.vaccineManagementSystem.Exceptions.EmailShouldNotNullException;
+import com.example.vaccineManagementSystem.Exceptions.UserNotFound;
 import com.example.vaccineManagementSystem.Models.User;
+import com.example.vaccineManagementSystem.RequestDtos.AddUserDto;
 import com.example.vaccineManagementSystem.RequestDtos.updateEmailDto;
+import com.example.vaccineManagementSystem.ResponseDtos.UserResponseDto;
 import com.example.vaccineManagementSystem.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -17,8 +24,15 @@ public class UserController {
      UserService service;
 
      @PostMapping("/add")
-     public User addUser(@RequestBody User user){
-      return service.addUser(user);
+     public ResponseEntity<String> addUser(@RequestBody AddUserDto addUserDto) throws EmailShouldNotNullException,EmailIsAlreadyPresent
+     {
+       try {
+           String result=service.addUser(addUserDto);
+           return new ResponseEntity<>(result,HttpStatus.CREATED);
+       }catch (Exception E){
+           return new ResponseEntity<>(E.getMessage(),HttpStatus.NOT_FOUND);
+       }
+
      }
 
 
@@ -36,10 +50,32 @@ public class UserController {
     }
 
     @GetMapping("/getByEmail/{emailId}")
-     public User getUserById(@PathVariable("emailId")String email){
-       return service.getUser(email);
+     public ResponseEntity<User> getUserById(@PathVariable("emailId")String email) throws UserNotFound {
+
+      try {
+          User user=service.getUser(email);
+          return new ResponseEntity<>(user,HttpStatus.ACCEPTED);
+      }catch (Exception e){
+          return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+      }
     }
 
+//      @GetMapping("/getByEmail")
+//      public ResponseEntity<UserResponseDto> getUserById(@RequestBody UserResponseDto userResponseDto){
+//
+//      try{
+//      UserResponseDto userResponseDtoNew=service.getById(userResponseDto);
+//      userResponseDtoNew.setStatusMessage("SUCCESS");
+//      userResponseDtoNew.setStatusCode("200");
+//      return new ResponseEntity<>(userResponseDtoNew,HttpStatus.FOUND);
+//
+//      }catch (Exception e){
+//         userResponseDto.setStatusCode("500");
+//         userResponseDto.setStatusMessage("Failure");
+//         return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+//      }
+//
+//      }
 
 
 }

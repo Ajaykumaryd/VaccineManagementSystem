@@ -1,5 +1,6 @@
 package com.example.vaccineManagementSystem.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,6 +25,7 @@ public class Appointment {
     @JoinColumn
     private Doctor doctor;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn
     private User user;

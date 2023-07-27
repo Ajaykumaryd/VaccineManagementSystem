@@ -19,6 +19,6 @@ public class VaccinationService {
       }
       vaccinationCenterRepository.save(vaccinationCenter);
 
-        return "Vaccination center added at a location "+vaccinationCenter.getAddress();
+      return "Vaccination center added at a location "+vaccinationCenter.getAddress();
     }
 }
