@@ -7,7 +7,6 @@ import com.example.vaccineManagementSystem.RequestDtos.AddDoctorDto;
 public class DoctorTransformer {
 
     public static Doctor convertDtoToEntity(AddDoctorDto addDoctorDto){
-
      Doctor doctor=Doctor.builder().
                    name(addDoctorDto.getName()).
                    age(addDoctorDto.getAge()).

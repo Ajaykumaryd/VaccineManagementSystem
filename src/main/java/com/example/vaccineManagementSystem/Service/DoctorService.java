@@ -1,9 +1,6 @@
 package com.example.vaccineManagementSystem.Service;
 
-import com.example.vaccineManagementSystem.Exceptions.CenterNotFound;
-import com.example.vaccineManagementSystem.Exceptions.DoctorAlreadyExistsException;
-import com.example.vaccineManagementSystem.Exceptions.DoctorNotFound;
-import com.example.vaccineManagementSystem.Exceptions.EmailIdEmptyException;
+import com.example.vaccineManagementSystem.Exceptions.*;
 import com.example.vaccineManagementSystem.Models.Doctor;
 import com.example.vaccineManagementSystem.Models.VaccinationCenter;
 import com.example.vaccineManagementSystem.Repository.DoctorRepository;
@@ -14,6 +11,7 @@ import com.example.vaccineManagementSystem.Transformer.DoctorTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -64,5 +62,14 @@ public class DoctorService {
         return "Doctor has been associated to center";
     }
 
+
+    public List<Doctor> getDoctors(Integer centerId)throws VaccinationCentreNotFound {
+    Optional<VaccinationCenter> vaccinationCenterOptional=vaccinationCenterRepository.findById(centerId);
+    if(vaccinationCenterOptional.isEmpty()){
+         throw new VaccinationCentreNotFound("Vaccination center is not Found");
     }
+    List<Doctor> doctorList=vaccinationCenterOptional.get().getDoctorList();
+    return doctorList;
+    }
+}
 

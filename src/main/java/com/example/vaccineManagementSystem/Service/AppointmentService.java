@@ -36,21 +36,16 @@ public class AppointmentService {
         if(!userOptional.isPresent()){
             throw new UserNotFound("UserId not found");
         }
-
         Doctor doctor = doctorOptional.get();
         User user = userOptional.get();
-
         Appointment appointment = new Appointment();
 
         //Creating the object and setting of its attributes
         appointment.setAppointmentDate(appointmentReqDto.getAppointmentDate());
         appointment.setAppointmentTime(appointmentReqDto.getAppointmentTime());
-
         //setting up the foreign key attributes
         appointment.setDoctor(doctor);
         appointment.setUser(user);
-
-
         //saving it before so that i can get the primary key of the appointment table
         appointment = appointmentRepository.save(appointment);
 
@@ -60,6 +55,6 @@ public class AppointmentService {
         doctorRepository.save(doctor);
         userRepository.save(user);
 
-        return "Appointment made sucessfully";
+        return "Appointment made successfully";
     }
 }

@@ -1,11 +1,9 @@
 package com.example.vaccineManagementSystem.Models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -17,6 +15,8 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Data
 public class VaccinationCenter {
 
 
@@ -34,6 +34,7 @@ public class VaccinationCenter {
 
     private int doseCapacity;
 
+     @JsonIgnore
     @OneToMany(mappedBy ="vaccinationCenter",cascade=CascadeType.ALL)
     private List<Doctor> doctorList = new ArrayList<>();
 

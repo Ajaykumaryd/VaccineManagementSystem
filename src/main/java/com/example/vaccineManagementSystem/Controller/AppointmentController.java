@@ -22,7 +22,6 @@ public class AppointmentController {
 
     @PostMapping("/book")
     public ResponseEntity<String> bookAppointment(@RequestBody AppointmentReqDto appointmentReqDto){
-
         try {
             String result = appointmentService.bookAppointment(appointmentReqDto);
             return new ResponseEntity<>(result, HttpStatus.OK);
@@ -30,6 +29,9 @@ public class AppointmentController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+
+
 
 
 
