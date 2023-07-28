@@ -3,6 +3,7 @@ package com.example.vaccineManagementSystem.Controller;
 import com.example.vaccineManagementSystem.Models.Doctor;
 import com.example.vaccineManagementSystem.RequestDtos.AddDoctorDto;
 import com.example.vaccineManagementSystem.RequestDtos.AssociateDocDto;
+import com.example.vaccineManagementSystem.ResponseDtos.DoctorDtoForCentre;
 import com.example.vaccineManagementSystem.Service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,9 +43,9 @@ public class DoctorController {
     }
 
       @GetMapping("/getAllDoctors/{CenterId}")
-       public ResponseEntity<List<Doctor>> getAllDoctorsByCenterId(@PathVariable Integer CenterId) {
+       public ResponseEntity<List<DoctorDtoForCentre>> getAllDoctorsByCenterId(@PathVariable Integer CenterId) {
         try {
-            List<Doctor> doctorList=doctorService.getDoctors(CenterId);
+            List<DoctorDtoForCentre> doctorList=doctorService.getDoctors(CenterId);
             return new ResponseEntity<>(doctorList,HttpStatus.FOUND);
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);

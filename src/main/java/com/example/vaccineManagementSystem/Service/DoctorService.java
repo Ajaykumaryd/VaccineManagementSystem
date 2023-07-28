@@ -7,10 +7,12 @@ import com.example.vaccineManagementSystem.Repository.DoctorRepository;
 import com.example.vaccineManagementSystem.Repository.VaccinationCenterRepository;
 import com.example.vaccineManagementSystem.RequestDtos.AddDoctorDto;
 import com.example.vaccineManagementSystem.RequestDtos.AssociateDocDto;
+import com.example.vaccineManagementSystem.ResponseDtos.DoctorDtoForCentre;
 import com.example.vaccineManagementSystem.Transformer.DoctorTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,13 +65,17 @@ public class DoctorService {
     }
 
 
-    public List<Doctor> getDoctors(Integer centerId)throws VaccinationCentreNotFound {
+    public List<DoctorDtoForCentre> getDoctors(Integer centerId)throws VaccinationCentreNotFound {
     Optional<VaccinationCenter> vaccinationCenterOptional=vaccinationCenterRepository.findById(centerId);
     if(vaccinationCenterOptional.isEmpty()){
          throw new VaccinationCentreNotFound("Vaccination center is not Found");
     }
     List<Doctor> doctorList=vaccinationCenterOptional.get().getDoctorList();
-    return doctorList;
+    List<DoctorDtoForCentre> doctorList1 = new ArrayList<>();
+    for(Doctor doctor: doctorList){
+        doctorList1.add(DoctorTransformer.doctorToDoctorDtoForCentre(doctor));
+    }
+    return doctorList1;
     }
 }
 

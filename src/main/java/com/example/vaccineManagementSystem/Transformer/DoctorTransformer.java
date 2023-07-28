@@ -3,6 +3,7 @@ package com.example.vaccineManagementSystem.Transformer;
 
 import com.example.vaccineManagementSystem.Models.Doctor;
 import com.example.vaccineManagementSystem.RequestDtos.AddDoctorDto;
+import com.example.vaccineManagementSystem.ResponseDtos.DoctorDtoForCentre;
 
 public class DoctorTransformer {
 
@@ -16,5 +17,13 @@ public class DoctorTransformer {
      return doctor;
     }
 
+    public static DoctorDtoForCentre doctorToDoctorDtoForCentre(Doctor doctor) {
+        DoctorDtoForCentre doctorDto = DoctorDtoForCentre.builder()
+                .name(doctor.getName())
+                .gender(doctor.getGender())
+                .age(doctor.getAge())
+                .build();
+        return doctorDto;
+    }
 
 }
