@@ -1,5 +1,8 @@
 package com.example.vaccineManagementSystem.RequestDtos;
 
+import com.example.vaccineManagementSystem.Enums.AppointmentStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -15,5 +18,8 @@ public class AppointmentReqDto {
     private Date appointmentDate;
 
     private LocalTime appointmentTime;
+
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus AppointmentStatus;
 
 }

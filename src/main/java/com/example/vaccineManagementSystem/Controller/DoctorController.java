@@ -52,4 +52,26 @@ public class DoctorController {
         }
       }
 
+    @GetMapping("/allMaleDoctors/{centerId}")
+    public ResponseEntity<List<DoctorDtoForCentre>> getAllMaleDoctors(@PathVariable Integer centerId){
+    try{
+        List<DoctorDtoForCentre>doctorDtoForCentres=doctorService.getMaleDoctors(centerId);
+        return new ResponseEntity<>(doctorDtoForCentres,HttpStatus.FOUND);
+    }catch (Exception e){
+        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+      }
+    }
+
+    @GetMapping("/allFemaleDoctors/{centerId}")
+    public ResponseEntity<List<DoctorDtoForCentre>> getAllFemaleDoctorsByCenterId(@PathVariable Integer centerId) {
+        try {
+            List<DoctorDtoForCentre> list = doctorService.getAllFemaleDoctorsByCenterId(centerId);
+            return new ResponseEntity<>(list, HttpStatus.FOUND);
+        } catch (Exception re) {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+
 }

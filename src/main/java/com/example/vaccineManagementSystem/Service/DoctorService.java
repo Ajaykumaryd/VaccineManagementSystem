@@ -1,5 +1,6 @@
 package com.example.vaccineManagementSystem.Service;
 
+import com.example.vaccineManagementSystem.Enums.Gender;
 import com.example.vaccineManagementSystem.Exceptions.*;
 import com.example.vaccineManagementSystem.Models.Doctor;
 import com.example.vaccineManagementSystem.Models.VaccinationCenter;
@@ -76,6 +77,37 @@ public class DoctorService {
         doctorList1.add(DoctorTransformer.doctorToDoctorDtoForCentre(doctor));
     }
     return doctorList1;
+    }
+
+    public List<DoctorDtoForCentre> getMaleDoctors(Integer centerId) throws VaccinationCentreNotFound {
+
+        Optional<VaccinationCenter> vaccinationCenterOptional=vaccinationCenterRepository.findById(centerId);
+        if(vaccinationCenterOptional.isEmpty()){
+            throw new VaccinationCentreNotFound("Vaccination center is not Found");
+        }
+        List<Doctor>doctorList=vaccinationCenterOptional.get().getDoctorList();
+        List<DoctorDtoForCentre>doctorDtoForCentres=new ArrayList<>();
+        for(Doctor doctor:doctorList){
+            if(doctor.getGender().equals(Gender.MALE)){
+               doctorDtoForCentres.add(DoctorTransformer.doctorToDoctorDtoForCentre(doctor));
+            }
+        }
+        return doctorDtoForCentres;
+    }
+
+    public List<DoctorDtoForCentre> getAllFemaleDoctorsByCenterId(Integer centerId) throws VaccinationCentreNotFound {
+        Optional<VaccinationCenter> centerOpt = vaccinationCenterRepository.findById(centerId);
+        if(centerOpt.isEmpty()) {
+            throw new VaccinationCentreNotFound("Centre is not present");
+        }
+        List<Doctor> doctors = centerOpt.get().getDoctorList();
+        List<DoctorDtoForCentre> doctorList = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            if(doctor.getGender().equals(Gender.FEMALE)) {
+                doctorList.add(DoctorTransformer.doctorToDoctorDtoForCentre(doctor));
+            }
+        }
+        return doctorList;
     }
 }
 

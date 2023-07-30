@@ -32,7 +32,6 @@ public class UserController {
        }catch (Exception E){
            return new ResponseEntity<>(E.getMessage(),HttpStatus.NOT_FOUND);
        }
-
      }
 
 

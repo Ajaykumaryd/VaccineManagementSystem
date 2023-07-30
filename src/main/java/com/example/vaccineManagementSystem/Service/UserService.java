@@ -66,19 +66,13 @@ public class UserService {
 
     public UserResponseDto getById(UserResponseDto userResponseDto) throws UserNotFound{
 
-
-      Optional<User> optionalUserResponseDto=repository.findByEmailId(userResponseDto.getEmailId());
+        Optional<User> optionalUserResponseDto=repository.findByEmailId(userResponseDto.getEmailId());
       if(optionalUserResponseDto.isEmpty()){
           throw new UserNotFound("User is not Presenet");
       }
-
       User user=optionalUserResponseDto.get();
-
       UserResponseDto userResponseDto1=UserTransformer.ConvertEntityToEntity(user);
-
-
-     return userResponseDto1;
-
+      return userResponseDto1;
     }
 }
 
