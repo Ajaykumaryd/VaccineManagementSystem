@@ -76,5 +76,13 @@ public class UserController {
 //
 //      }
 
-
+        @GetMapping("/getVaccinatedDate")
+        public ResponseEntity<String> getVaccinationDate(@RequestParam("userId") Integer userId){
+        try{
+           Date date=service.getVacDate(userId);
+            return new ResponseEntity<>(date.toString(),HttpStatus.FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+        }
+     }
 }

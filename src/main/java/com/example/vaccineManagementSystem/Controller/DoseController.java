@@ -4,10 +4,7 @@ import com.example.vaccineManagementSystem.Service.DoseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/dose")
@@ -21,6 +18,8 @@ public class DoseController {
         String result= doseService.giveDose(doseId,userId);
         return new ResponseEntity<>(result, HttpStatus.ACCEPTED);
     }
+
+
 
 
 }

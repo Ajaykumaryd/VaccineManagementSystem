@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "appointments")
+@Table(name ="appointments")
 @Data
 public class Appointment {
 
@@ -23,7 +23,7 @@ public class Appointment {
     private LocalTime appointmentTime;
 
     @Enumerated(EnumType.STRING)
-    private AppointmentStatus AppointmentStatus;
+    private AppointmentStatus appointmentStatus= AppointmentStatus.PENDING;
 
     @ManyToOne
     @JoinColumn

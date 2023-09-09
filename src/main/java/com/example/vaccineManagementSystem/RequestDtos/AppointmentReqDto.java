@@ -20,6 +20,6 @@ public class AppointmentReqDto {
     private LocalTime appointmentTime;
 
     @Enumerated(EnumType.STRING)
-    private AppointmentStatus AppointmentStatus;
+    private AppointmentStatus appointmentStatus;
 
 }

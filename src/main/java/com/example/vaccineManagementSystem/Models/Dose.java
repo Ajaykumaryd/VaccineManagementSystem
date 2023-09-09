@@ -12,8 +12,6 @@ import java.util.Date;
 @Data
 public class Dose {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; //Primary Key
@@ -28,7 +26,6 @@ public class Dose {
     @OneToOne
     @JoinColumn
     private User user;
-
 
 
 }

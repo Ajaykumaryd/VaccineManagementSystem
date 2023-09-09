@@ -3,6 +3,7 @@ package com.example.vaccineManagementSystem.Controller;
 
 import com.example.vaccineManagementSystem.RequestDtos.AppointmentReqDto;
 import com.example.vaccineManagementSystem.RequestDtos.CancelAppointmentRequestDto;
+import com.example.vaccineManagementSystem.RequestDtos.ChangeAppointmentDate;
 import com.example.vaccineManagementSystem.Service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,24 +42,15 @@ public class AppointmentController {
     }
 
 
+    @PutMapping("/changeDate")
+    public ResponseEntity<String> changeDate(@RequestBody ChangeAppointmentDate changeAppointmentDate){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     try{
+         String res=appointmentService.changeDate(changeAppointmentDate);
+         return new ResponseEntity<>(res,HttpStatus.ACCEPTED);
+     }catch (Exception e){
+          return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+     }
+    }
 
 }

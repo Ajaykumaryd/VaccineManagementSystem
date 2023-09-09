@@ -3,6 +3,7 @@ package com.example.vaccineManagementSystem.Service;
 
 import com.example.vaccineManagementSystem.Exceptions.EmailIsAlreadyPresent;
 import com.example.vaccineManagementSystem.Exceptions.EmailShouldNotNullException;
+import com.example.vaccineManagementSystem.Exceptions.UserIsNotVaccinated;
 import com.example.vaccineManagementSystem.Exceptions.UserNotFound;
 import com.example.vaccineManagementSystem.Models.Dose;
 import com.example.vaccineManagementSystem.Models.User;
@@ -73,6 +74,24 @@ public class UserService {
       User user=optionalUserResponseDto.get();
       UserResponseDto userResponseDto1=UserTransformer.ConvertEntityToEntity(user);
       return userResponseDto1;
+    }
+
+    public Date getVacDate(Integer userId)throws UserNotFound,UserIsNotVaccinated{
+
+    Optional<User> userOptional=repository.findById(userId);
+    if(userOptional.isEmpty()){
+        throw new UserNotFound("User not found");
+    }
+
+    User user=userOptional.get();
+
+    if(user.getDose()==null){
+        throw new UserIsNotVaccinated("User is not vaccinated");
+    }
+
+     Dose dose=user.getDose();
+     return dose.getVaccinationDate();
+
     }
 }
 

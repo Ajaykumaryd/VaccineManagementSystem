@@ -29,7 +29,6 @@ public class User {
 
     private int age;
 
-
     private String mobileNo;
 
     @Column(unique = true)
@@ -42,10 +41,9 @@ public class User {
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
     private Dose dose;
 
-     @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Appointment> appointmentList = new ArrayList<>();
 
 
-
-     }
+}

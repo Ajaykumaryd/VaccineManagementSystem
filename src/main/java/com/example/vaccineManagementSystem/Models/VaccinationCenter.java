@@ -19,25 +19,28 @@ import java.util.List;
 @Data
 public class VaccinationCenter {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     private String centreName;
+
 
     private LocalTime openingTime;
 
+
     private LocalTime closingTime;
+
 
     private String address;
 
+
     private int doseCapacity;
 
-     @JsonIgnore
+
+    @JsonIgnore
     @OneToMany(mappedBy ="vaccinationCenter",cascade=CascadeType.ALL)
     private List<Doctor> doctorList = new ArrayList<>();
-
-
 
 }
