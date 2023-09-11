@@ -1,12 +1,13 @@
 package com.example.vaccineManagementSystem.RequestDtos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalTime;
 
 @Data
+@Getter
+@Setter
+
 public class VaccinationCentreDto {
 
     private String centreName;
