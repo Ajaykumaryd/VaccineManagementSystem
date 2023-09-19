@@ -48,20 +48,16 @@ APIs: The system offers a robust set of more than 20 APIs that enable integratio
 # Overview of Project
 
 ## Flow Diagram
-<<<<<<< HEAD
-![flowchart.jpg](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2Fflowchart.jpg)
-=======
-![flowchart.png](https://github.com/Ajaykumaryd/VaccineManagementSystem/blob/master/src/main/java/com/example/vaccineManagementSystem/Images/flowchart.jpg)
->>>>>>> 08d7ea026fe18ccdc95aaf6b5154cbac47cfbcd4
+![flowchart](https://github.com/Ajaykumaryd/VaccineManagementSystem/assets/127691663/c3238f46-b7c3-4a6d-8451-609aa6081bd8)
+
 ## APIs Screen Shots
 
-![User.png](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2FUser.png)
+![User](https://github.com/Ajaykumaryd/VaccineManagementSystem/assets/127691663/631f0cbb-c133-4334-90d9-b019e58dff61)
 
-![Doctor.png](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2FDoctor.png)
+![Centre And Dose](https://github.com/Ajaykumaryd/VaccineManagementSystem/assets/127691663/92570a7e-fc61-4e35-8d95-eadd07da7d92)
+![Appointment](https://github.com/Ajaykumaryd/VaccineManagementSystem/assets/127691663/9bd505c1-734c-4be0-9540-a4e3edb7e736)
+![Doctor](https://github.com/Ajaykumaryd/VaccineManagementSystem/assets/127691663/f9b225ac-c70e-43b6-9918-5431746151cb)
 
-![Appointment.png](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2FAppointment.png)
-
-![Centre And Dose.png](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2FCentre%20And%20Dose.png)
 
 # Usage
 Users, doctors, and vaccination center administrators can interact with the system through the web interface or by utilizing the provided APIs. Below are some common usage scenarios:
