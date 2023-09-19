@@ -19,6 +19,7 @@ public class DoseService {
 
         User user = userRepository.findById(userId).get();
         //An Entity of that model has been created
+
         //This entity will be saved in the database
         Dose dose = new Dose();
 
