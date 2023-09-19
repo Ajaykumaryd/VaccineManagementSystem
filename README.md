@@ -48,7 +48,11 @@ APIs: The system offers a robust set of more than 20 APIs that enable integratio
 # Overview of Project
 
 ## Flow Diagram
+<<<<<<< HEAD
 ![flowchart.jpg](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2Fflowchart.jpg)
+=======
+![flowchart.png](https://github.com/Ajaykumaryd/VaccineManagementSystem/blob/master/src/main/java/com/example/vaccineManagementSystem/Images/flowchart.jpg)
+>>>>>>> 08d7ea026fe18ccdc95aaf6b5154cbac47cfbcd4
 ## APIs Screen Shots
 
 ![User.png](src%2Fmain%2Fjava%2Fcom%2Fexample%2FvaccineManagementSystem%2FImages%2FUser.png)
